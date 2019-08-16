@@ -29,10 +29,6 @@ optimiser: adam
 # DATASET OPTIONS
 dset_name: patchcamelyon
 dataroot: data/
-seg_threshold: 0.3
-levels: ['max']
-splits_file: splits.yaml
-seg_cover_file: seg_cover_hsv.pkl
 
 
 
