@@ -2,19 +2,19 @@
 
 [Paper](https://www3.cs.stonybrook.edu/~cvl/content/papers/2018/Le_PR19.pdf)
 
-# Results
+# Results on validation patches of PatchCamelyon
 
 ### Input
-!(figures/input.png)
+![input](figures/input.png)
 
 ### Reconstruction 
-!(figures/recon.png)
+![reconstruction](figures/recon.png)
 
 ### Foreground
-!(figures/foreground.png)
+![foreground](figures/foreground.png)
 
 ### Detection map
-!(figures/detection_map.png)
+![detection map](figures/detection_map.png)
 
 ### Background
-!(figures/background.png)
+![background](figures/background.png)
