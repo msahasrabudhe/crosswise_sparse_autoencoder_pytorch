@@ -277,7 +277,7 @@ def main(sys_string=None):
     # Loop to run for n_epochs. 
     while epoch < options.n_epochs:
         # Decay learning rate. We decay it here so that it is easier to resume from a saved training session.
-        if epoch in options.lr_decay_every:
+        if epoch in options.lr_decay_at:
             align_left('Decaying learning rates ...')
             for opt in [optimiser]:
                 for pg in opt.param_groups:

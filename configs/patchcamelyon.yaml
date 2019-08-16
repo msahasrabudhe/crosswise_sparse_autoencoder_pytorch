@@ -20,7 +20,7 @@ n_epochs: 1000
 losses: ['recon']
 checkpoint_special: [50, 100, 150, 200]
 lr_decay: 0.1
-lr_decay_every: [50, 100, 150, 200]
+lr_decay_at: [50, 100, 150, 200]
 scale_recon: 1
 optimiser: adam
 
