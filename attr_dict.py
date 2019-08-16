@@ -13,8 +13,10 @@
 # limitations under the License.
 #
 #
-# msahasrabudhe Edit: An additional function make_recursive_attr_dict
-#       to recursively initialise an AttrDict.
+# msahasrabudhe Edits: 
+#   1.  An function make_recursive_attr_dict to recursively 
+#       initialise an AttrDict.
+#   2.  A function to load a .yaml file into an AttrDict.
 ##############################################################################
 
 """A simple attribute dictionary used for representing configuration options."""
