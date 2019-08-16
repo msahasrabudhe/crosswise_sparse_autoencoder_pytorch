@@ -1,0 +1,40 @@
+# MODEL OPTIONS
+ndf: 32
+nc: 3
+image_size: 96
+alpha: 0.1              # Not used. 
+beta: 0.99995           # step size to update alpha. 
+r: 20
+p: 0.1
+
+
+
+# TRAINING OPTIONS
+patch_size: 96
+batch_size: 128
+workers: 0
+lr: 0.0002
+momentum: 0.9
+weight_decay: 0.0005
+n_epochs: 1000
+losses: ['recon']
+checkpoint_special: [50, 100, 150, 200]
+lr_decay: 0.1
+lr_decay_every: [50, 100, 150, 200]
+scale_recon: 1
+optimiser: adam
+
+
+
+# DATASET OPTIONS
+dset_name: patchcamelyon
+dataroot: data/
+seg_threshold: 0.3
+levels: ['max']
+splits_file: splits.yaml
+seg_cover_file: seg_cover_hsv.pkl
+
+
+
+# OTHER OPTIONS
+load: '' 

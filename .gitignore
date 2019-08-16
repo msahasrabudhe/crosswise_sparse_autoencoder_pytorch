@@ -1,0 +1,7 @@
+output/
+*.ipynb
+*.pyc
+*.npy
+*.pth
+data/
+save/
