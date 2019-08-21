@@ -65,6 +65,19 @@ def ColourTransform(mean=1.0, std=0.03):
 
 
 # ======================================================================================================
+class RandomRotation(object):
+    """
+    A randomly chosen rotation is applied to a PIL image.
+    """
+    def __init__(self, angles_list):
+        self.angles_list    = angles_list
+    def __call__(self, img):
+        A                   = np.random.choice(self.angles_list)
+        return img.rotate(A)
+# ======================================================================================================
+
+
+# ======================================================================================================
 class FixImageSize(object):
     """
     FixImageSize ::: A transformation to pad an image so that every 

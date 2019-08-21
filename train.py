@@ -125,6 +125,7 @@ def main(sys_string=None):
     # Transforms for the training dataset. 
     train_transforms    = vtransforms.Compose([
                             vtransforms.RandomCrop(patch_size, pad_if_needed=True, padding_mode='reflect'),
+                            RandomRotation([0, 90, 180, 270]),
                             vtransforms.RandomHorizontalFlip(p=0.5),
                             vtransforms.RandomVerticalFlip(p=0.5),
                           ])
