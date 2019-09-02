@@ -81,6 +81,9 @@ class DetectionBranch(nn.Module):
 
         self.relu       = lambda x: F.leaky_relu(x, 0.2)
 
+        # Boolean to determine if it is the first call to the detection branch.
+        self.first      = True
+
     def forward(self, x, train=True):
         # Pass through convolutional layers to get a dense detection map. 
         D_prime         = self.relu(self.bn1(self.conv1(x)))
@@ -97,16 +100,22 @@ class DetectionBranch(nn.Module):
             tau         = torch.mean(_v[:, t_idx])
     
             # Update tau. The following rule appears in the paper. 
-            self.tau    = 0.9 * self.tau + 0.1 * tau
+            if self.first:
+                self.tau    = tau
+                self.first  = False
+            else:
+                self.tau    = 0.9 * self.tau + 0.1 * tau
 
             # Another rule worth trying---keep increasing the weight of the tau recorded so far,
             #   by decaying self.alpha
 #            self.tau    = (1 - self.alpha) * self.tau + (self.alpha) * tau
             # Decay alpha---only used with the second update rule. 
             self.alpha  = (1 + self.alpha) ** self.beta - 1
+        else:
+            tau         = self.tau
 
         # Apply sigmoid to get a sparse detection map. 
-        D               = torch.sigmoid(self.r * (D_prime - self.tau))
+        D               = torch.sigmoid(self.r * (D_prime - tau))
         return D
         
 
