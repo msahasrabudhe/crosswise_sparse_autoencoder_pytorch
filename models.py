@@ -93,7 +93,7 @@ class DetectionBranch(nn.Module):
             # Use tau derived from the dense detection map only in the training phase. 
             #   In the val/test phase, we instead use the tau learnt so far.
 
-            t_idx       = int(np.floor(self.p / 100.0 * (x.size(1) * x.size(2))))
+            t_idx       = int(np.floor(self.p / 100.0 * (x.size(1) * x.size(2) * x.size(3))))
             # Train with tau if in training phase. Else, use the learnt tau. 
             _v          = D_prime.view(x.size(0), -1).detach()         # .detach() is necessary. 
             _v, _       = torch.sort(_v, dim=1, descending=True)
@@ -133,7 +133,19 @@ class ForegroundBranch(nn.Module):
         self.bn2        = nn.BatchNorm2d(self.nc // 4)
         # ===========================
 
+        if options.nms: 
+            self.nms    = self.nms_(options.nms)
+        else:
+            self.nms    = None
+
         self.relu       = lambda x: F.leaky_relu(x, 0.2)
+
+    def nms_(self, ws):
+        max_pool        = nn.MaxPool2d(ws, stride=1, padding=(ws-1)//2)
+        def call_(D):
+            W           = max_pool(D)
+            return D * ((W == D).float())
+        return call_
 
     def forward(self, M, D):
         # D comes from DetectionBranch. It is supposed to be the sparse detection map. 
